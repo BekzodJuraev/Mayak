@@ -28,5 +28,16 @@ class Orders(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    name=models.CharField(max_length=250)
 
+    def __str__(self):
+        return self.name
+class Items(models.Model):
+    name=models.CharField(max_length=250)
+    pictures=models.ImageField(upload_to='items/')
+    categories = models.ManyToManyField(Category)
+
+    def __str__(self):
+        return self.name
 
