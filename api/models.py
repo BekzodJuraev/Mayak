@@ -5,8 +5,7 @@ class Parnters(models.Model):
     pictures=models.ImageField(upload_to='images/')
 
 
-    def __str__(self):
-        return self.pictures
+
 
 class Staff(models.Model):
     photo=models.ImageField(upload_to='staff/')
