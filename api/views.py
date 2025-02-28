@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import Staffserizzers,Partnerserizzers
+from .serializers import Staffserizzers,Partnerserizzers,OrderSer
 from .models import Staff,Parnters
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
@@ -27,3 +27,17 @@ class PartnerAPI(APIView):
         staff=Parnters.objects.all()
         serializer=self.serializer_class(staff,many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class OrderAPI(APIView):
+    serializer_class = OrderSer
+
+    @swagger_auto_schema(
+        responses={status.HTTP_200_OK: OrderSer()}
+    )
+
+    def post(self,request):
+        serializer=self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

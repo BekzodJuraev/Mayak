@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Staff,Parnters,Items
+from .models import Staff,Parnters,Items,Orders
 
 class Staffserizzers(serializers.ModelSerializer):
     class Meta:
@@ -10,3 +10,9 @@ class Partnerserizzers(serializers.ModelSerializer):
     class Meta:
         model=Parnters
         fields=['pictures']
+
+
+class OrderSer(serializers.ModelSerializer):
+    class Meta:
+        model=Orders
+        fields=['name','phone','email','message']
