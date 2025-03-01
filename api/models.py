@@ -41,3 +41,19 @@ class Items(models.Model):
     def __str__(self):
         return self.name
 
+class Basket(models.Model):
+    name=models.CharField(max_length=250)
+    phone = models.CharField(max_length=250)
+
+
+    def __str__(self):
+        return self.name
+
+
+class Basketproducts(models.Model):
+    basket=models.ForeignKey(Basket,on_delete=models.CASCADE,related_name='products')
+    items=models.ForeignKey(Items,on_delete=models.CASCADE)
+    count=models.IntegerField()
+
+    def __str__(self):
+        return f"Basket {self.basket.id} - Item {self.items.id} (Count: {self.count})"

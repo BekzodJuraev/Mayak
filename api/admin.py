@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Staff,Orders,Parnters,Items,Category
+from .models import Staff,Orders,Parnters,Items,Category,Basket,Basketproducts
 
 @admin.register(Staff)
 class Staff(admin.ModelAdmin):
@@ -23,3 +23,12 @@ class Category(admin.ModelAdmin):
 @admin.register(Items)
 class Items(admin.ModelAdmin):
     list_display = ['name',]
+
+@admin.register(Basket)
+class Basket(admin.ModelAdmin):
+    list_display = ['name','phone']
+
+
+@admin.register(Basketproducts)
+class Basketproducts(admin.ModelAdmin):
+    list_display = ['basket','items']

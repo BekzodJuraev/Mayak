@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import Staffserizzers,Partnerserizzers,OrderSer
+from .serializers import Staffserizzers,Partnerserizzers,OrderSer,BasketSer
 from .models import Staff,Parnters
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
@@ -9,7 +9,7 @@ from rest_framework.response import Response
 class StaffAPI(APIView):
     serializer_class=Staffserizzers
     @swagger_auto_schema(
-        responses={status.HTTP_200_OK: Staffserizzers()}
+        responses={status.HTTP_200_OK: Staffserizzers(many=True)}
     )
 
     def get(self,request):
@@ -21,7 +21,7 @@ class PartnerAPI(APIView):
     serializer_class = Partnerserizzers
 
     @swagger_auto_schema(
-        responses={status.HTTP_200_OK: Partnerserizzers()}
+        responses={status.HTTP_200_OK: Partnerserizzers(many=True)}
     )
     def get(self,request):
         staff=Parnters.objects.all()
@@ -33,6 +33,20 @@ class OrderAPI(APIView):
 
     @swagger_auto_schema(
         responses={status.HTTP_200_OK: OrderSer()}
+    )
+
+    def post(self,request):
+        serializer=self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BasketAPI(APIView):
+    serializer_class=BasketSer
+
+    @swagger_auto_schema(
+        responses={status.HTTP_200_OK: BasketSer()}
     )
 
     def post(self,request):
