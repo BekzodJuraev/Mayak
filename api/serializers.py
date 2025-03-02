@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Staff,Parnters,Items,Orders,Basket,Basketproducts
+from .models import Staff,Parnters,Items,Orders,Basket,Basketproducts,Category
 
 class Staffserizzers(serializers.ModelSerializer):
     class Meta:
@@ -40,3 +40,13 @@ class BasketSer(serializers.ModelSerializer):
             count = item.pop('count')
             Basketproducts.objects.create(basket=basket, items=add_item, count=count)
         return basket
+
+
+class ItemsSer(serializers.ModelSerializer):
+    categories = serializers.SlugRelatedField(many=True,
+        queryset=Category.objects.all(),
+        slug_field='name'
+    )
+    class Meta:
+        model=Items
+        fields=['name','pictures','categories']

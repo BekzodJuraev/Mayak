@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import Staffserizzers,Partnerserizzers,OrderSer,BasketSer
-from .models import Staff,Parnters
+from .serializers import Staffserizzers,Partnerserizzers,OrderSer,BasketSer,ItemsSer
+from .models import Staff,Parnters,Items
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.response import Response
@@ -55,3 +55,16 @@ class BasketAPI(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ItemsAPI(APIView):
+    serializer_class = ItemsSer
+
+    @swagger_auto_schema(
+        responses={status.HTTP_200_OK: ItemsSer(many=True)}
+    )
+
+    def get(self,request):
+        items=Items.objects.all()
+        serializer=self.serializer_class(items,many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
