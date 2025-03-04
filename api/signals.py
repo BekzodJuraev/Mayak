@@ -2,9 +2,11 @@ from django.db.models.signals import post_save,pre_save
 from django.dispatch import receiver
 import telegram
 from .models import Orders
+from config import BOT_TOKEN,CHANEL_SUPPORT
 
-bot=telegram.Bot("7990952348:AAHho7QK_-J_WIQkoG54HIZ5w5iUDhYj4d4")
-group_id=-4780572548
+bot=telegram.Bot(BOT_TOKEN)
+group_id=CHANEL_SUPPORT
+
 @receiver(post_save,sender=Orders)
 def send_message(sender,instance,created,*args,**kwargs):
     if created:
