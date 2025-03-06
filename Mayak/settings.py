@@ -134,12 +134,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
-CORS_ALLOW_ALL_ORIGINS = False  # Set False if you only want specific origins
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",
+# ]
+CORS_ALLOW_ALL_ORIGINS = True  # Set False if you only want specific origins
 CORS_ALLOW_CREDENTIALS = False
 
-CORS_ALLOW_HEADERS = [
-    "content-type",
-]
+# CORS_ALLOW_HEADERS = [
+#     "content-type",
+# ]
