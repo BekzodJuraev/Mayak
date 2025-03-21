@@ -6,7 +6,7 @@ token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDQzNzU3NDMsImlhdCI6MT
 
 payload = {
     'mobile_phone': '906566970',
-    'message': 'Это тест от Eskiz',
+    'message': 'как дела',
     'from': 'Mayak',
 }
 
