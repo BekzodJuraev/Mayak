@@ -5,5 +5,6 @@ urlpatterns=[
     path('api/partner',views.PartnerAPI.as_view(),name='partner'),
     path('api/order',views.OrderAPI.as_view(),name='order'),
     path('api/basket',views.BasketAPI.as_view(),name='basket'),
-    path('api/items',views.ItemsAPI.as_view(),name='items')
+    path('api/items',views.ItemsAPI.as_view(),name='items'),
+    path('api/case',views.CaseAPI.as_view(),name='case')
 ]

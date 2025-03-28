@@ -57,3 +57,20 @@ class Basketproducts(models.Model):
 
     def __str__(self):
         return f"Basket {self.basket.id} - Item {self.items.id} (Count: {self.count})"
+
+class Cat(models.Model):
+    name=models.CharField(max_length=250)
+
+
+    def __str__(self):
+        return self.name
+class Case(models.Model):
+    name = models.CharField(max_length=250)
+    pictures = models.ImageField(upload_to='case/')
+    description=models.TextField()
+    categories=models.ForeignKey(Cat,on_delete=models.CASCADE,related_name='cat')
+
+
+
+    def __str__(self):
+        return self.name

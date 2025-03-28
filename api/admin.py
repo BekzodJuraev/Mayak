@@ -1,5 +1,12 @@
 from django.contrib import admin
-from .models import Staff,Orders,Parnters,Items,Category,Basket,Basketproducts
+from .models import Staff,Orders,Parnters,Items,Category,Basket,Basketproducts,Cat,Case
+
+@admin.register(Case)
+class Case(admin.ModelAdmin):
+    list_display = ['name']
+@admin.register(Cat)
+class Cat(admin.ModelAdmin):
+    list_display = ['name']
 
 @admin.register(Staff)
 class Staff(admin.ModelAdmin):
