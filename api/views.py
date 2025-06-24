@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import Staffserizzers,Partnerserizzers,OrderSer,BasketSer,ItemsSer,CaseSer
-from .models import Staff,Parnters,Items,Case
+from .serializers import Staffserizzers,Partnerserizzers,OrderSer,BasketSer,ItemsSer,CaseSer,ReelsSer
+from .models import Staff,Parnters,Items,Case,Reels
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.response import Response
@@ -83,6 +83,23 @@ class CaseAPI(APIView):
     )
 
     def get(self,request):
-        items=Case.objects.all()
+        items = Case.objects.all()
+        filters = request.query_params.get('filters')
+
+        if filters:
+            items = Case.objects.filter(categories__name=filters)
+        serializer=self.serializer_class(items,many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ReelsView(APIView):
+    serializer_class = ReelsSer
+
+    @swagger_auto_schema(
+        responses={status.HTTP_200_OK: ReelsSer(many=True)}
+    )
+
+    def get(self,request):
+        items = Reels.objects.all()
         serializer=self.serializer_class(items,many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

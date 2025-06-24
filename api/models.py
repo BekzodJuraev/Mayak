@@ -74,3 +74,11 @@ class Case(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Reels(models.Model):
+    link=models.URLField()
+
+
+    def __str__(self):
+        return self.link

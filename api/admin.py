@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Staff,Orders,Parnters,Items,Category,Basket,Basketproducts,Cat,Case
-
+from .models import Staff,Orders,Parnters,Items,Category,Basket,Basketproducts,Cat,Case,Reels
+@admin.register(Reels)
+class Reels(admin.ModelAdmin):
+    list_display = ['link']
 @admin.register(Case)
 class Case(admin.ModelAdmin):
     list_display = ['name']

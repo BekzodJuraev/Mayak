@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Staff,Parnters,Items,Orders,Basket,Basketproducts,Category,Case,Cat
+from .models import Staff,Parnters,Items,Orders,Basket,Basketproducts,Category,Case,Cat,Reels
 from googleapiclient.discovery import build
 from config import BOT_TOKEN,CHANEL_SUPPORT,API_KEY_GOOGLE,ESKIZ
 import telegram
@@ -116,3 +116,11 @@ class CaseSer(serializers.ModelSerializer):
     class Meta:
         model=Case
         fields=['name','pictures','categories','description','categoryid']
+
+
+class ReelsSer(serializers.ModelSerializer):
+
+
+    class Meta:
+        model=Reels
+        fields=['link']
